@@ -2,30 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Characters : MonoBehaviour
+abstract public class Characters : MonoBehaviour
 {
-
-
-    protected Rigidbody2D body;
-    public float jumpForce = 1;
-
+    protected Rigidbody2D rBody;
+    protected Vector2 jumpAngle = new Vector2(0.1f, 1f);
+    protected float jumpForce = 3000f;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-        body = GetComponent<Rigidbody2D>();
+        rBody = GetComponent<Rigidbody2D>();
+        rBody.mass = 10f;
+        rBody.freezeRotation = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
 
+    }
 
     protected void Jump()
     {
-        body.AddForce(new Vector2(0,jumpForce));
+        print(jumpAngle);
+        print(jumpAngle * jumpForce);
+        rBody.AddForce(jumpAngle* jumpForce);
     }
 
 
